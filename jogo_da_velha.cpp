@@ -118,7 +118,11 @@ void jogadores()
 }
 void verificar()
 {
+<<<<<<< HEAD
     if (matriz[0][0] == 'X')
     {
     }
 }
+=======
+}
+>>>>>>> 6c89d6de9b72bee194ab03ed8c176d297fb4e2bc
