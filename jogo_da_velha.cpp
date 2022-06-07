@@ -95,9 +95,11 @@ void tabuleiro()
 void jogadores()
 {
     int linha, coluna;
-    cout << "Digite uma linha:" << endl;
+    cout<<"Jogador 1 = X " << endl << "Jogador 2 = O " << endl;
+    
+    cout << "Digite uma linha: (0 ate 2)" << endl;
     cin >> linha;
-    cout << "Digite uma coluna:" << endl;
+    cout << "Digite uma coluna:(0 ate 2)" << endl;
     cin >> coluna;
     if (matriz[linha][coluna] != ' ')
     {
@@ -118,9 +120,11 @@ void jogadores()
     }
 
     tabuleiro();
+    verificar();
 }
 int verificar()
 {
+    int ganhou;
     if (matriz[0][0] == 'X' && matriz[0][1] == 'X' && matriz[0][2] == 'X' ||
         matriz[1][0] == 'X' && matriz[1][1] == 'X' && matriz[1][2] == 'X' ||
         matriz[2][0] == 'X' && matriz[2][1] == 'X' && matriz[2][2] == 'X' ||
@@ -147,12 +151,13 @@ int verificar()
         ganhou = true;
         return true;
     }
-    if (matriz[0][0] != ' ' && matriz[0][1] != ' ' && matriz[0][2] != ' ' 
-    && matriz[1][0] != ' ' && matriz[1][1] != ' ' && matriz[1][2] != ' ' &&
+    if (matriz[0][0] != ' ' && matriz[0][1] != ' ' && matriz[0][2] != ' ' &&
+        matriz[1][0] != ' ' && matriz[1][1] != ' ' && matriz[1][2] != ' ' &&
         matriz[2][0] != ' ' && matriz[2][1] != ' ' && matriz[2][2] != ' ')
         {
             cont_empate++;
             ganhou = true;
             return true;
         }
+    return ganhou;       
 }
