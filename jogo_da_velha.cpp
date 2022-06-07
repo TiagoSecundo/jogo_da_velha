@@ -6,6 +6,8 @@ string j_1, j_2;
 char caracter_jogador_1 = 'X', caracter_jogador_2 = 'O';
 char matriz[3][3];
 bool primeiro = true;
+bool ganhou = true, perdeu = false;
+int cont_jogador1, cont_jogador2, cont_empate;
 int menu();
 void jogo();
 void matriz_2();
@@ -118,11 +120,13 @@ void jogadores()
 }
 void verificar()
 {
-<<<<<<< HEAD
-    if (matriz[0][0] == 'X')
+    if (matriz[0][0] == 'X' && matriz[0][1] == 'X' && matriz[0][2] == 'X' ||
+        matriz[1][0] == 'X' && matriz[1][1] == 'X' && matriz[1][2] == 'X' ||
+        matriz[2][0] == 'X' && matriz[2][1] == 'X' && matriz[2][2] == 'X' ||
+        matriz[0][1] == 'X' && matriz[1][1] == 'X' && matriz[2][1] == 'X' ||
+        matriz[0][2] == 'X' && matriz[1][2] == 'X' && matriz[2][2] == 'X' ||
+        matriz[0][0] == 'X' && matriz[1][1] == 'X' && matriz[2][2] == 'X' ||
+        matriz[0][2] == 'X' && matriz[1][1] == 'X' && matriz[2][0] == 'X' ||
+        matriz[0][0] == 'X' && matriz[1][0] == 'X' && matriz[2][0] == 'X')
     {
     }
-}
-=======
-}
->>>>>>> 6c89d6de9b72bee194ab03ed8c176d297fb4e2bc
