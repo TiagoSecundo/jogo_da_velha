@@ -6,53 +6,65 @@ string j_1, j_2;
 char caracter_jogador_1 = 'X', caracter_jogador_2 = 'O';
 char matriz[3][3];
 bool primeiro = true;
-bool ganhou;
-int cont_jogador1, cont_jogador2, cont_empate;
+bool ganhou = false;
+bool fim = false;
+int cont_jogador1 = 0, cont_jogador2 = 0, cont_empate = 0;
 int menu();
 void jogo();
 void matriz_2();
 void tabuleiro();
 void jogadores();
-int verificar();
-int main()
+bool verificar();
+int main() // funcao principal do codigo
 {
     int escolha = menu();
-    switch (escolha)
-    {
-    case 1:
-        jogo();
-        break;
-    case 2:
-        cout << "Até a proxima... ";
-    default:
-        break;
-    }
-    return 0;
-}
-int menu()
-{ // menu inicial do jogo
-    int jogo;
-    cout << "----------------------------------------" << endl;
-    cout << "      BEM VINDO AO JOGO DA VELHA " << endl;
-    cout << "----------------------------------------" << endl;
-    cout << " Insira a opçao desejada: " << endl;
-    cout << "1. Iniciar jogo. " << endl;
-    cout << "2. Sair " << endl;
-    cin >> jogo;
-    system("cls");
-
-    return jogo;
-}
-
-void jogo()
-{
+    int esc;
     cout << " Insira nome do jogador 1: " << endl;
     cin >> j_1;
     cout << " Insira nome do jogador 2: " << endl;
     cin >> j_2;
+    do { 
+        jogo();
+        cout<<"O jogador " << j_1 << " ganhou " << cont_jogador1 << " partidas." << endl;
+        cout<<"O jogador " << j_2 << " ganhou " << cont_jogador2 << " partidas."<< endl;
+        cout<<"Partidas empatadas " << cont_empate << endl;
+        cout<<"Digite '1' para jogar novamente. "<< endl;
+        cout<<"Digite '0' para sair do jogo. " << endl;
+        cin>> esc;
+    }
+    while (esc == 1);
+
+    
+     
+}
+int menu()
+{ // menu inicial do jogo
+    int jogo1;
+    cout << "----------------------------------------" << endl;
+    cout << "      BEM VINDO AO JOGO DA VELHA " << endl;
+    cout << "----------------------------------------" << endl
+         << endl
+         << endl;
+    cout << " Insira a opcao desejada: " << endl;
+    cout << "1. Iniciar jogo. " << endl;
+    cout << "2. Sair " << endl;
+    cin >> jogo1;
+    system("cls");
+
+    return jogo1;
+}
+
+void jogo()
+{
+    
     matriz_2();
-    tabuleiro();
-    verificar();
+    do
+    {
+        tabuleiro();
+        jogadores();
+        verificar();
+    } while (ganhou == false);
+   
 }
 void matriz_2()
 { // criando espaços vazios na funçao
@@ -89,42 +101,41 @@ void tabuleiro()
         }
         cout << endl;
     }
-    jogadores();
 }
 
 void jogadores()
-{
+{ // Recebe nome e as posicoes de jogadas de cada player
     int linha, coluna;
-    cout<<"Jogador 1 = X " << endl << "Jogador 2 = O " << endl;
-    
+
+    cout << "Jogador 1 = X " << endl
+         << "Jogador 2 = O " << endl;
+
     cout << "Digite uma linha: (0 ate 2)" << endl;
     cin >> linha;
     cout << "Digite uma coluna:(0 ate 2)" << endl;
     cin >> coluna;
     if (matriz[linha][coluna] != ' ')
     {
-        cout << "Posição indisponivel, tente novamente";
+        cout << "Posicao indisponivel, tente novamente" << endl;
     }
     else
     {
         if (primeiro)
         {
-            matriz[linha][coluna] = caracter_jogador_1;
+            matriz[linha][coluna] = caracter_jogador_1;   
         }
         else
         {
-            matriz[linha][coluna] = caracter_jogador_2;
+            matriz[linha][coluna] = caracter_jogador_2;    
         }
 
         primeiro = !primeiro;
     }
 
     tabuleiro();
-    verificar();
 }
-int verificar()
-{
-    int ganhou;
+bool verificar()
+{ // verifica o ganhador
     if (matriz[0][0] == 'X' && matriz[0][1] == 'X' && matriz[0][2] == 'X' ||
         matriz[1][0] == 'X' && matriz[1][1] == 'X' && matriz[1][2] == 'X' ||
         matriz[2][0] == 'X' && matriz[2][1] == 'X' && matriz[2][2] == 'X' ||
@@ -151,13 +162,13 @@ int verificar()
         ganhou = true;
         return true;
     }
-    if (matriz[0][0] != ' ' && matriz[0][1] != ' ' && matriz[0][2] != ' ' &&
-        matriz[1][0] != ' ' && matriz[1][1] != ' ' && matriz[1][2] != ' ' &&
-        matriz[2][0] != ' ' && matriz[2][1] != ' ' && matriz[2][2] != ' ')
-        {
-            cont_empate++;
-            ganhou = true;
-            return true;
-        }
-    return ganhou;       
+    else if (matriz[0][0] != ' ' && matriz[0][1] != ' ' && matriz[0][2] != ' ' &&
+             matriz[1][0] != ' ' && matriz[1][1] != ' ' && matriz[1][2] != ' ' &&
+             matriz[2][0] != ' ' && matriz[2][1] != ' ' && matriz[2][2] != ' ')
+    {
+        cont_empate++;
+        ganhou = true;
+        return true;
+    }
 }
+
